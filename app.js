@@ -20,12 +20,17 @@ function build() {
   function drawV(warpIteration, x, y) { // warpIteration is indexed at 0
     warpOffset = (cellWidth / warpNumber) * warpIteration; // x offset
     ctx.beginPath();
-    ctx.strokeStyle = 'white';
+    ctx.strokeStyle = 'orange';
+    ctx.shadowBlur = 10;
+    ctx.shadowColor = "orange";
     ctx.moveTo(x, y);
-        ctx.strokeStyle = 'red';
-        ctx.stroke()
     ctx.lineTo(x + warpOffset, y + cellHeight);
-        ctx.strokeStyle = 'blue';
+    ctx.lineWidth = variableThickness ? warpIteration: thickness;
+    ctx.stroke()
+
+    ctx.beginPath()
+    ctx.moveTo(x + warpOffset, y + cellHeight)
+    ctx.strokeStyle = 'blue';
     ctx.lineTo(x + cellWidth, y);
     ctx.lineWidth = variableThickness ? warpIteration: thickness;
     ctx.stroke();
