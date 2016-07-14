@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Warp Terrain</title>
+    <link rel="stylesheet" type="text/css" href="stylesheet.css">
+  </head>
+  <body>
+    <div id="controls">
+      <a>#HorizontalCells:</a>
+      <input id="width-cells" value="6"></input>
+      <a>#VerticalCells:</a>
+      <input id="height-cells" value="5"></input>
+      <a>#WarpPoints:</a>
+      <input id="warp-number" value="3"></input>
+      <a>#Thickness:</a>
+      <input id="thickness" value="3"></input>
+      <a>VariableThickness:</a>
+      <input id="variable-thickness" type="checkbox"></input>
+      <button type="button" value="build" onclick="build()">BUILD</button>
+
+    </div>
+    <canvas id="canvas"></canvas>
+    <script type="text/javascript" src="app.js"></script>
+  </body>
+</html>
