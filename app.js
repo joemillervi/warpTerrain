@@ -1,7 +1,46 @@
-function build() {
+// Look for .hamburger
+var $hamburger = document.querySelector(".hamburger");
+var $menu = document.getElementById('menu');
+
+$hamburger.addEventListener("click", () => {
+  $hamburger.classList.toggle("is-active");
+  $menu.classList.toggle('is-off-screen')
+});
+
+// resize menu
+$menu.style.height = window.innerHeight - 30 + 'px';
+
+// color inputs
+function updateLeftColor(jscolor) {
+  leftColor = '#' + jscolor;
+  build()
+}
+function updateRightColor(jscolor) {
+  rightColor = '#' + jscolor;
+  build()
+}
+function updateLeftColorGlow(jscolor) {
+  leftColorGlow = '#' + jscolor;
+  build()
+}
+function updateRightColorGlow(jscolor) {
+  rightColorGlow = '#' + jscolor;
+  build()
+}
+function updateBackgroundColorGlow(jscolor) {
+  document.getElementById("canvas").style.background = '#' + jscolor;
+}
+
+var leftColor = '#64C2B7';
+var leftColorGlow = '#64C2B7'
+var rightColor = '#C2646F';
+var rightColorGlow = '#C2646F'
+
+// Logic for warpTerrain
+function build(isAlteringRandomness) {
   var canvas = document.getElementById('canvas');
   var pageWidth = canvas.width = window.innerWidth;
-  var pageHeight = canvas.height = window.innerHeight - 30;
+  var pageHeight = canvas.height = window.innerHeight - 13;
   console.log('width', window.innerWidth, pageWidth)
   console.log('height', window.innerHeight, pageHeight)
   // user input vars
@@ -9,6 +48,10 @@ function build() {
   var thickness = Number(document.getElementById('thickness').value)
   var widthCells = Number(document.getElementById('width-cells').value);
   var heightCells = Number(document.getElementById('height-cells').value);
+  var rightGlowAmount = Number(document.getElementById('right-glow-amount').value);
+  var leftGlowAmount = Number(document.getElementById('left-glow-amount').value);
+  var rightDeletePercent = Number(document.getElementById('left-delete-percent').value);
+  var leftDeletePercent = Number(document.getElementById('right-delete-percent').value);
   var cellWidth = pageWidth / widthCells;
   var cellHeight = pageHeight / heightCells;
 
@@ -19,21 +62,28 @@ function build() {
   var ctx = canvas.getContext('2d');
   function drawV(warpIteration, x, y) { // warpIteration is indexed at 0
     warpOffset = (cellWidth / warpNumber) * warpIteration; // x offset
-    ctx.beginPath();
-    ctx.strokeStyle = 'orange';
-    ctx.shadowBlur = 10;
-    ctx.shadowColor = "orange";
-    ctx.moveTo(x, y);
-    ctx.lineTo(x + warpOffset, y + cellHeight);
-    ctx.lineWidth = variableThickness ? warpIteration: thickness;
-    ctx.stroke()
+    if (isAlteringRandomness ? Math.random() * 100 > rightDeletePercent : true) {
+      ctx.beginPath();
+      ctx.strokeStyle = rightColor;
+      ctx.shadowBlur = rightGlowAmount;
+      ctx.shadowColor = rightColorGlow;
+      ctx.moveTo(x, y);
+      ctx.lineTo(x + warpOffset, y + cellHeight);
+      ctx.lineWidth = variableThickness ? warpIteration: thickness;
+      ctx.fill()
+      ctx.stroke()
+    }
 
-    ctx.beginPath()
-    ctx.moveTo(x + warpOffset, y + cellHeight)
-    ctx.strokeStyle = 'blue';
-    ctx.lineTo(x + cellWidth, y);
-    ctx.lineWidth = variableThickness ? warpIteration: thickness;
-    ctx.stroke();
+    if (isAlteringRandomness ? Math.random() * 100 > leftDeletePercent : true) {
+      ctx.beginPath()
+      ctx.moveTo(x + warpOffset, y + cellHeight)
+      ctx.strokeStyle = leftColor;
+      ctx.shadowBlur = leftGlowAmount;
+      ctx.shadowColor = leftColorGlow;
+      ctx.lineTo(x + cellWidth, y);
+      ctx.lineWidth = variableThickness ? warpIteration: thickness;
+      ctx.stroke();
+    }
   }
 
   // draw to page

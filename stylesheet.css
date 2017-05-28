@@ -47,28 +47,90 @@ table {
 	border-spacing: 0;
 }
 
-body {
-  background-color:black ;
+
+/*STYLES*/
+
+@font-face {
+    font-family: adamCG;
+    src: url(ADAM.CG_PRO.otf);
 }
+@font-face {
+    font-family: linuxRah;
+    src: url(LinBiolinum_Rah.ttf);
+}
+
+body {
+  background-color: black;
+}
+
 a {
   font-size: 1.3em;
+	font-family: linuxRah;
 }
-#controls {
+
+#header {
+  margin: 16px 0px 16px 0px;
+}
+
+#header a {
+  font-family: adamCG;
+  font-size: 3em;
+  color: white;
+  width: 350px;
+  display: block;
+  margin: 0 auto;
+}
+
+#menu-text {
+  color: white;
+	font-size: 1.3em;
+	margin: 39px 0px 0px 14px;
+	position: absolute;;
+	font-family: linuxRah;
+}
+
+#header a:nth-child(4) {
+  font-size: 2;
+  color: grey;
+  letter-spacing: .46em;
+  left: 13px;
+  position: relative;
+}
+
+.is-off-screen {
+  left: -300px;
+  transform: translate(-350px, 0);
+}
+
+#menu {
   position: absolute;
+  /*height:100%;*/
+  width: 300px;
+  margin-top: 0px;
+  background-color: black;
+	border-right: grey thin solid;
+	color: white;
+  transition-duration: 0.12s;
+	padding: 5px 0px 0px 10px;
+}
+
+#header button {
+  position: absolute;
+	top: 6px;
   z-index: 1;
-  height: 25px;
-  width: 100%;
-  background-color: white;
-  bottom: 3px;
-  left: 5px;
+}
+
+input[type=range] {
+  width:120px;
+  font-size: 1.3em;
 }
 input {
   width:40px;
   font-size: 1.3em;
 }
+button:focus {
+    outline:none;
+}
 button {
   font-size: 1.3em;
-}
-#controls input {
-  margin-right: 30px;
 }

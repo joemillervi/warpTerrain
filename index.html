@@ -4,23 +4,74 @@
     <meta charset="utf-8">
     <title>Warp Terrain</title>
     <link rel="stylesheet" type="text/css" href="stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="hamburgers.min.css">
   </head>
   <body>
-    <div id="controls">
-      <a>#HorizontalCells:</a>
-      <input id="width-cells" value="6"></input>
-      <a>#VerticalCells:</a>
-      <input id="height-cells" value="5"></input>
-      <a>#WarpPoints:</a>
-      <input id="warp-number" value="3"></input>
-      <a>#Thickness:</a>
-      <input id="thickness" value="3"></input>
+    <div id="header">
+      <button class="hamburger hamburger--slider" type="button">
+        <span class="hamburger-box">
+          <span class="hamburger-inner"></span>
+        </span>
+      </button>
+      <div id="menu-text">editor palette</div>
+      <a>WARP TERRAIN</a>
+      <a>PATTERN</a>
+    </div>
+    <div id="menu" class="is-o">
+      <a>CONSTRUCTION</a>
+      <br>
+      <a>Horizontal Cells:</a>
+      <input id="width-cells" type="range" min="0" value="6" max="50" oninput="build()">
+      <br>
+      <!-- <input id="width-cells" value="6"></input> -->
+      <a>Vertical Cells:</a>
+      <input id="height-cells" type="range" min="0" value="5" max="50" oninput="build()">
+      <br>
+      <!-- <input type="text" id="height-cells" value="5"></input> -->
+      <a>Warp Points:</a>
+      <input id="warp-number" type="range" min="1" value="3" max="25" oninput="build()">
+      <br>
+      <!-- <input type="text" id="warp-number" value="3"></input> -->
+      <a>Thickness:</a>
+      <input id="thickness" type="range" min="0" value="3" max="15" oninput="build()">
+      <br>
+      <!-- <input type="text" id="thickness" value="3"></input> -->
       <a>VariableThickness:</a>
-      <input id="variable-thickness" type="checkbox"></input>
-      <button type="button" value="build" onclick="build()">BUILD</button>
-
+      <input id="variable-thickness" type="checkbox" onchange="build()"></input>
+      <br>
+      <br>
+      <br>
+      <a>COLORS</a>
+      <br>
+      <a>Left Color:</a><input class="jscolor {onFineChange:'updateLeftColor(this)'}" value="#64C2B7">
+      <br>
+      <a>Left Glow Color:</a><input class="jscolor {onFineChange:'updateLeftColorGlow(this)'}" value="#64C2B7">
+      <br>
+      <a>Left Glow:</a>
+      <input id="left-glow-amount" type="range" min="1" value="3" max="20" oninput="build()">
+      <br>
+      <br>
+      <a>Right Color:</a><input class="jscolor {onFineChange:'updateRightColor(this)'}" value="#C2646F">
+      <br>
+      <a>Right Glow Color:</a><input class="jscolor {onFineChange:'updateRightColorGlow(this)'}" value="#C2646F">
+      <br>
+      <a>Right Glow:</a>
+      <input id="right-glow-amount" type="range" min="1" value="3" max="10" oninput="build()">
+      <br>
+      <br>
+      <a>Background Color:</a><input class="jscolor {onFineChange:'updateBackgroundColorGlow(this)'}" value="#000000">
+      <br>
+      <br>
+      <a>RANDOM DELETIONS</a>
+      <br>
+      <a>Right % chance of deletion</a>
+      <input id="right-delete-percent" type="range" min="1" value="3" max="100" oninput="build(true)">
+      <br>
+      <a>Left % chance of deletion</a>
+      <input id="left-delete-percent" type="range" min="1" value="3" max="100" oninput="build(true)">
     </div>
     <canvas id="canvas"></canvas>
+    <script type="text/javascript" src="jscolor.js"></script>
     <script type="text/javascript" src="app.js"></script>
   </body>
 </html>
